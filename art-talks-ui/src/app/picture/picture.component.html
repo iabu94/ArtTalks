@@ -1,0 +1,25 @@
+<div class="picture-discussion">
+    <div class="picture-container">
+        <div class="picture-heading">
+            <h3>{{ selectedPicture.title }}</h3>
+            <p class="picture-artist-name">by {{ selectedPicture.artistName }}</p>
+        </div>
+        <img [src]="selectedPicture.imageURL" alt="Selected Artwork">
+    </div>
+    <div class="chat-container">
+        <div class="chat-header">
+          Chat
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <!-- Example Chat Messages -->
+          <div *ngFor="let chat of chats" class="message">
+            <strong>{{chat.sender}}:</strong> {{chat.message}}
+          </div>
+        </div>
+        <div class="chat-input">
+          <input type="text" (keydown.enter)="sendMessage()" [(ngModel)]="newMessage" placeholder="Type your message...">
+          <!-- <button id="send-button">Send</button> -->
+          <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
+        </div>
+      </div>
+</div>

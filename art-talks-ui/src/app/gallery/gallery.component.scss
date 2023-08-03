@@ -1,0 +1,42 @@
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.example-card {
+    max-width: calc((100vw - 50px) / 4);
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+/* styles.css or your component's CSS file */
+.search-input .mat-form-field-flex {
+    border-radius: 20px;
+}
+
+.search-input .mat-form-field-infix {
+    padding-left: 30px;
+    /* Adjust this value based on the size of the icon */
+}
+
+.search-input mat-icon {
+    margin-left: 10px;
+    color: rgba(0, 0, 0, 0.54);
+    /* You can change the color as per your requirement */
+}
+
+
+.search-input {
+    width: 90%;
+    padding-left: 50px;
+    padding-right: -50px;
+}
+
+.card-artist-name {
+    opacity: 0.5;
+    font-size: 14px;
+}
