@@ -17,6 +17,9 @@
           </div>
         </div>
         <div class="chat-input">
+          <button mat-icon-button color="accent" aria-label="Example icon button with a home icon" (click)="openDialog()">
+            <mat-icon>person</mat-icon>
+          </button>
           <input type="text" (keydown.enter)="sendMessage()" [(ngModel)]="newMessage" placeholder="Type your message...">
           <!-- <button id="send-button">Send</button> -->
           <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>

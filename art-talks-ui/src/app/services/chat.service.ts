@@ -21,7 +21,6 @@ export class ChatService {
     this.hub.start().catch(err => console.error('Error while starting the SignalR connection: ', err));
 
     this.hub.on('ReceiveMessage', (sender: string, message: string) => {
-      console.log('Recieved');
       const chatMessage: Chat = {
         sender: sender,
         message: message

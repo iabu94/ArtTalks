@@ -20,6 +20,7 @@ export class GalleryComponent implements OnInit {
     this.galleryService.getAllImages().subscribe(pictures => {
       this.pictures = pictures;
       this.filteredPictures = pictures;
+      this.selectedPicture = pictures[0];
     });
   }
 
