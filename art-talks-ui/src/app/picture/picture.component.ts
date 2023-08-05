@@ -10,19 +10,25 @@ import { ChatService } from '../services/chat.service';
   styleUrls: ['./picture.component.scss'],
 })
 export class PictureComponent implements OnInit {
-  @Input() selectedPicture!: Picture;
   newMessage = '';
-  userName = '';
+
+  @Input() selectedPicture!: Picture;
 
   chats: Chat[] = [];
+  filteredChats: Chat[] = []
 
   constructor(private chatService: ChatService, public dialog: MatDialog) {
-    this.chatService.chatMessage$.subscribe(message => {
-      this.chats.push(message);
-    });
   }
 
   ngOnInit(): void {
+    this.chatService.allMessagesSub.subscribe(chats => {
+      this.chats = chats;
+      this.filteredChats = chats.filter(c => c.id === this.selectedPicture.id);
+    });
+  }
+
+  log(type: string, value: any) {
+    console.log(type, value);
   }
 
   sendMessage() {
@@ -30,26 +36,29 @@ export class PictureComponent implements OnInit {
       this.openDialog();
     } else {
       const message: Chat = {
-        sender: this.userName,
+        id: this.selectedPicture.id,
+        sender: this.getCurrentUser(),
         message: this.newMessage
       };
-      this.chatService.sendMessage(message.sender, message.message);
+      this.chatService.sendMessage(message.id, message.sender, message.message);
       this.newMessage = '';
     }
   }
 
   getCurrentUser(): string {
-    return localStorage.getItem('user') ?? '';
+    return localStorage.getItem('user-at') ?? '';
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(AddUserComponent, {
-      data: {name: this.userName},
+      data: {name: this.getCurrentUser()},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      localStorage.setItem('user', result);
-      this.userName = result;
+      localStorage.setItem('user-at', result);
     });
   }
 }
+
+
+

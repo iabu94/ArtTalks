@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Picture } from '../models';
+import { Component, Input, OnInit } from '@angular/core';
+import { Chat, Picture } from '../models';
 import { GalleryService } from '../services/gallery.service';
 
 @Component({
@@ -12,6 +12,8 @@ export class GalleryComponent implements OnInit {
   pictures: Picture[] = [];
   filteredPictures: Picture[] = [];
   selectedPicture: Picture | undefined;
+  
+  @Input() allMessages: Chat[] =[];
 
   constructor(private galleryService: GalleryService) {
   }
@@ -20,7 +22,6 @@ export class GalleryComponent implements OnInit {
     this.galleryService.getAllImages().subscribe(pictures => {
       this.pictures = pictures;
       this.filteredPictures = pictures;
-      this.selectedPicture = pictures[0];
     });
   }
 
